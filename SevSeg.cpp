@@ -66,7 +66,7 @@ void SevSeg::print(byte number, boolean dotpoint) {
     }
     else {
         digitalWrite(pinArray[1], LOW);
-        shiftOut(pinArray[2], pinArray[0], MSBFIRST, commonAnode ? ~( dataArray[number] & dotpoint << 7 ) : ( dataArray[number] & dotpoint << 7 ));  
+        shiftOut(pinArray[2], pinArray[0], MSBFIRST, commonAnode ? ~( dataArray[number] | dotpoint << 7 ) : ( dataArray[number] | dotpoint << 7 ));  
         digitalWrite(pinArray[1], HIGH);
     }
 }
