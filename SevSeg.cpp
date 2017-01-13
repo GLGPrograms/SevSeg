@@ -34,7 +34,7 @@ SevSeg::SevSeg( byte a, byte b, byte c, byte d, byte e, byte f, byte g, byte dp,
     pinArray[6] = g;
     pinArray[7] = dp;
     
-    for (byte set=0; set<7; set++){
+    for (byte set=0; set<=7; set++){
         pinMode(pinArray[set],OUTPUT);
     }
 }
@@ -42,6 +42,7 @@ SevSeg::SevSeg( byte a, byte b, byte c, byte d, byte e, byte f, byte g, byte dp,
 SevSeg::SevSeg( byte clock, byte latch, byte data, boolean _commonAnode) {
     commonAnode = _commonAnode;
     shiftRegister = true;
+    // When you use shift register, DP is true
     
     pinArray = new byte[3];
     pinArray[0] = clock;
@@ -55,14 +56,15 @@ SevSeg::SevSeg( byte clock, byte latch, byte data, boolean _commonAnode) {
 }
 
 // Prints the number on the display
-void SevSeg::print(byte number, boolean dotpoint) {
+void SevSeg::print(byte number, boolean dotpoint_on) {
 	if (!shiftRegister) {
-        for (byte c = 0, dataTmp = dataArray[number]; c < 6; c++, dataTmp = dataTmp >> 1) {
+        for (byte c = 0, dataTmp = dataArray[number]; c < 7; c++, dataTmp = dataTmp >> 1) {
             digitalWrite(pinArray[c], commonAnode ? !(dataTmp & 0x01) : dataTmp & 0x01);
         }
         
         // Dotpoint PIN must be HIGH if display is COMMON CATHODE AND DOTPOINT is REQUIRED
-        digitalWrite(pinArray[7], !commonAnode && dotpoint);
+        if (dotpoint == true)
+            digitalWrite(pinArray[7], !commonAnode ^ dotpoint_on);
     }
     else {
         digitalWrite(pinArray[1], LOW);

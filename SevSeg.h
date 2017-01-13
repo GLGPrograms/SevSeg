@@ -48,14 +48,14 @@ class SevSeg {
 
 public:
   // Direct-wiring constructor
-  SevSeg (byte a, byte b, byte c, byte d, byte e, byte f, byte g, byte dp, boolean _commonAnode = false );
-  SevSeg (byte a, byte b, byte c, byte d, byte e, byte f, byte g, boolean _commonAnode = false );
+  SevSeg (byte a, byte b, byte c, byte d, byte e, byte f, byte g, byte dp, boolean _commonAnode );
+  SevSeg (byte a, byte b, byte c, byte d, byte e, byte f, byte g, boolean _commonAnode );
   // ShiftRegister-wiring constructor
-  SevSeg (byte clock, byte latch, byte data, boolean _commonAnode = false );
+  SevSeg (byte clock, byte latch, byte data, boolean _commonAnode );
   
   ~SevSeg();
   
-  void print(byte number, boolean dotpoint = false);
+  void print(byte number, boolean dotpoint_on = false);
     
 private:
   
