@@ -16,9 +16,10 @@ SevSeg::SevSeg( byte a, byte b, byte c, byte d, byte e, byte f, byte g, boolean 
     pinArray[6] = g;
     
     for (byte set=0; set<7; set++){
-        pinMode(pinArray[set],OUTPUT);
+        pinMode(pinArray[set], OUTPUT);
     }
 }
+
 SevSeg::SevSeg( byte a, byte b, byte c, byte d, byte e, byte f, byte g, byte dp, boolean _commonAnode ) {
     commonAnode = _commonAnode;
     dotpoint = true;
@@ -34,8 +35,8 @@ SevSeg::SevSeg( byte a, byte b, byte c, byte d, byte e, byte f, byte g, byte dp,
     pinArray[6] = g;
     pinArray[7] = dp;
     
-    for (byte set=0; set<=7; set++){
-        pinMode(pinArray[set],OUTPUT);
+    for (byte set=0; set<8; set++){
+        pinMode(pinArray[set], OUTPUT);
     }
 }
 
@@ -45,19 +46,19 @@ SevSeg::SevSeg( byte clock, byte latch, byte data, boolean _commonAnode) {
     // When you use shift register, DP is true
     
     pinArray = new byte[3];
-    pinArray[0] = clock;
-    pinArray[1] = latch;
-    pinArray[2] = data;
+    pinArray[_CLOCK_PIN] = clock;
+    pinArray[_LATCH_PIN] = latch;
+    pinArray[_DATA_PIN] = data;
     
     for (byte set=0; set<3; set++){
-        pinMode(pinArray[set],OUTPUT);
+        pinMode(pinArray[set], OUTPUT);
     }
 
 }
 
 // Prints the number on the display
 void SevSeg::print(byte number, boolean dotpoint_on) {
-	if (!shiftRegister) {
+	if (! shiftRegister) {
         for (byte c = 0, dataTmp = dataArray[number]; c < 7; c++, dataTmp = dataTmp >> 1) {
             digitalWrite(pinArray[c], commonAnode ? !(dataTmp & 0x01) : dataTmp & 0x01);
         }
@@ -67,9 +68,9 @@ void SevSeg::print(byte number, boolean dotpoint_on) {
             digitalWrite(pinArray[7], !commonAnode ^ dotpoint_on);
     }
     else {
-        digitalWrite(pinArray[1], LOW);
-        shiftOut(pinArray[2], pinArray[0], MSBFIRST, commonAnode ? ~( dataArray[number] | dotpoint << 7 ) : ( dataArray[number] | dotpoint << 7 ));  
-        digitalWrite(pinArray[1], HIGH);
+        digitalWrite(pinArray[_LATCH_PIN], LOW);
+        shiftOut(pinArray[_DATA_PIN], pinArray[_CLOCK_PIN], MSBFIRST, commonAnode ? ~( dataArray[number] | dotpoint << 7 ) : ( dataArray[number] | dotpoint << 7 ));  
+        digitalWrite(pinArray[_LATCH_PIN], HIGH);
     }
 }
 

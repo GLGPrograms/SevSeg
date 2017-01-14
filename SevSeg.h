@@ -1,4 +1,4 @@
-/* Seven Segmen Driver Library v1.0
+/* Seven Segment Driver Library v1.0
  * 
  * Adapted by
  * Giulio Fieramosca
@@ -23,8 +23,12 @@
 #include "WProgram.h"
 #endif
 
+#define _CLOCK_PIN
+#define _LATCH_PIN
+#define _DATA_PIN
+
 // Array of bits corresponding to digits 0-9
-// from left to right => segment g to segment a
+// from left to right => dot point, segment g to segment a
 const byte dataArray[] = {
     0b00111111,
     0b00000110,
@@ -48,10 +52,10 @@ class SevSeg {
 
 public:
   // Direct-wiring constructor
-  SevSeg (byte a, byte b, byte c, byte d, byte e, byte f, byte g, byte dp, boolean _commonAnode );
-  SevSeg (byte a, byte b, byte c, byte d, byte e, byte f, byte g, boolean _commonAnode );
+  SevSeg (byte a, byte b, byte c, byte d, byte e, byte f, byte g, boolean _commonAnode);
+  SevSeg (byte a, byte b, byte c, byte d, byte e, byte f, byte g, byte dp, boolean _commonAnode);
   // ShiftRegister-wiring constructor
-  SevSeg (byte clock, byte latch, byte data, boolean _commonAnode );
+  SevSeg (byte clock, byte latch, byte data, boolean _commonAnode);
   
   ~SevSeg();
   

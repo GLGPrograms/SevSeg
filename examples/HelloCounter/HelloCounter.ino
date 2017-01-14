@@ -1,5 +1,5 @@
 /*
-  Hello Count
+  Hello Counter
   Shows numbers from 0 to 9 on a seven segment display.
 
   Materials:
