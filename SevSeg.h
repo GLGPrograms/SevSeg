@@ -60,6 +60,7 @@ public:
   ~SevSeg();
   
   void print(byte number, boolean dotpoint_on = false);
+  void clear();
     
 private:
   
