@@ -7,7 +7,7 @@
   * 7 resistors (220 Ohm to 470 Ohm are ok)
   Connect the segment pins to Arduino ones, from Digital2 to Digital8.
   More info about connections are shown in README at
-  https://bitbucket.org/glgprograms/sevseg
+  https://github.com/GLGPrograms/SevSeg
 
   This example code is published with CC-BY-SA license.
 

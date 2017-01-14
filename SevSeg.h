@@ -23,9 +23,9 @@
 #include "WProgram.h"
 #endif
 
-#define _CLOCK_PIN
-#define _LATCH_PIN
-#define _DATA_PIN
+#define _CLOCK_PIN 0
+#define _LATCH_PIN 1
+#define _DATA_PIN  2
 
 // Array of bits corresponding to digits 0-9
 // from left to right => dot point, segment g to segment a

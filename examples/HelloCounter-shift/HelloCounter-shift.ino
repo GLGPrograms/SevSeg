@@ -10,7 +10,7 @@
   clock, latch and data signals respectively to Digital 8, 9 and 10 on
   Arduino. These pins can be changed.
   More info about connections are shown in README at
-  https://bitbucket.org/glgprograms/sevseg
+  https://github.com/GLGPrograms/SevSeg
 
   This example code is published with CC-BY-SA license.
 
