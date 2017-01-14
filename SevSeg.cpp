@@ -74,6 +74,23 @@ void SevSeg::print(byte number, boolean dotpoint_on) {
     }
 }
 
+// Clear the display
+void SevSeg::clear() {
+	if (! shiftRegister) {
+		for (byte c = 0; c < 7; c++)
+            digitalWrite(pinArray[c], commonAnode);
+        
+        // Dotpoint PIN must be HIGH if display is COMMON CATHODE AND DOTPOINT is REQUIRED
+        if (dotpoint == true)
+            digitalWrite(pinArray[7], commonAnode);
+	}
+	else {
+		digitalWrite(pinArray[_LATCH_PIN], LOW);
+        shiftOut(pinArray[_DATA_PIN], pinArray[_CLOCK_PIN], MSBFIRST, commonAnode ? 0xFF : 0x00 );  
+        digitalWrite(pinArray[_LATCH_PIN], HIGH);
+	}
+}
+
 // Deallocates the dynamic data
 SevSeg::~SevSeg() {
     delete[] pinArray;
