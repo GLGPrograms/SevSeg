@@ -55,7 +55,7 @@ public:
   SevSeg (byte a, byte b, byte c, byte d, byte e, byte f, byte g, boolean _commonAnode);
   SevSeg (byte a, byte b, byte c, byte d, byte e, byte f, byte g, byte dp, boolean _commonAnode);
   // ShiftRegister-wiring constructor
-  SevSeg (byte clock, byte latch, byte data, boolean _commonAnode);
+  SevSeg (byte clock, byte latch, byte data, boolean _commonAnode, byte _numDisplays);
   
   ~SevSeg();
   
@@ -66,10 +66,15 @@ private:
   
   // Pointer to the pins' array
   byte *pinArray;
+  // Display buffer: display[0] è il più a destra
+  byte *displayBuffer;
   
   boolean shiftRegister;
   boolean commonAnode;
   boolean dotpoint;
+  byte numDisplays;
+  
+  void writeBuffer();
 };
 
 #endif
